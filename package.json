@@ -1,22 +1,11 @@
 {
-  "dependencies": {
-    "bcryptjs": "^3.0.3",
-    "cors": "^2.8.6",
-    "express": "^5.2.1",
-    "sqlite3": "^6.0.1",
-    "vite": "^8.0.16"
-  },
   "name": "projeto_formulario",
+  "private": true,
   "version": "1.0.0",
-  "description": "Sistema de cadastro e autenticação de usuários",
-  "main": "server.js",
+  "description": "Monorepo com front_end e back_end separados",
   "scripts": {
-    "start": "node server.js",
-    "dev": "node server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs"
+    "backend:start": "npm --prefix back_end start",
+    "backend:dev": "npm --prefix back_end run dev",
+    "frontend:dev": "npm --prefix front_end dev"
+  }
 }

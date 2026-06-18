@@ -1,203 +1,100 @@
-# Sistema de Cadastro e Autenticação
+# Projeto Formular
 
-## Descrição
-Aplicação web de cadastro e autenticação de usuários desenvolvida com React (frontend) e Express + SQLite (backend), utilizando validação rigorosa em ambas as camadas.
+## Estrutura do projeto
 
-## Tecnologias Utilizadas
+O projeto foi reorganizado em duas pastas principais:
 
-### Frontend
-- **React 19.2.6** - Biblioteca para criar interfaces
-- **Vite 8.0.12** - Build tool e dev server
-- **React Hook Form** - Gerenciamento de formulários
-- **Axios** - Cliente HTTP para requisições
-- **Zod** - Validação de dados
+- `front_end/` — aplicação React + Vite
+- `back_end/` — servidor Node.js + Express + SQLite
 
-### Backend
-- **Express 5.2.1** - Framework web
-- **SQLite3** - Banco de dados
-- **bcryptjs** - Hash de senhas
-- **CORS** - Compartilhamento de recursos entre origens
+Também foram adicionados guias de apoio:
+- `Guia_Inicio.md` — como usar e rodar o frontend junto com o backend
+- `GUiA_estudos.md` — material de apoio para estudo
 
-## Requisitos
-- Node.js (v14+)
-- npm ou yarn
+## Executando o projeto
 
-## Instalação
-
-### 1. Instalar dependências do backend
+### 1. Instalar dependências
 ```bash
-cd c:\Users\labins.pmw\Projeto_formulario
+cd c:\Users\savio\Projeto_Formulario\back_end
+npm install
+
+cd c:\Users\savio\Projeto_Formulario\front_end
 npm install
 ```
 
-### 2. Instalar dependências do frontend
+### 2. Rodar o backend
 ```bash
-cd Projeto_form
-npm install
-```
-
-## Execução
-
-### Backend (em um terminal)
-```bash
+cd c:\Users\savio\Projeto_Formulario\back_end
 npm start
-# ou
-npm run dev
 ```
-O servidor rodará na porta 3001: `http://localhost:3001`
 
-### Frontend (em outro terminal)
+### 3. Rodar o frontend
 ```bash
-cd Projeto_form
+cd c:\Users\savio\Projeto_Formulario\front_end
 npm run dev
 ```
-A aplicação será aberta em `http://localhost:5173` (ou outra porta disponível)
 
-## Funcionalidades
+## Comandos úteis no root
 
-### ✅ Cadastro de Usuário
-- **Validação de campos obrigatórios** (Nome, Email, Senha, Confirmação de Senha)
-- **Validação no frontend** com React Hook Form
-- **Validação no backend** com regras rigorosas
-- **Verificação de email único** no banco de dados
-- **Hash de senha** com bcryptjs
-- **Mensagens de erro descritivas** para o usuário
+No diretório raiz você também pode executar scripts de forma direcionada:
 
-### ✅ Login de Usuário
-- **Autenticação** com email e senha
-- **Comparação segura** de senhas com bcrypt
-- **Mensagens de sucesso/erro** claras
-- **Dados do usuário retornados** após login bem-sucedido
-
-### ✅ Tratamento de Erros
-- **Validação frontend** - Feedback imediato ao usuário
-- **Validação backend** - Segurança adicional
-- **Tratamento de exceções** - Blocos try-catch em requisições HTTP
-- **Mensagens de erro específicas** para cada tipo de falha
-- **Tratamento de falhas de conexão** com o servidor
-
-## Estrutura do Projeto
-
-```
-Projeto_formulario/
-├── server.js                 # Servidor Express principal
-├── database.js              # Inicialização do SQLite
-├── users.db                 # Banco de dados (criado automaticamente)
-├── routes/
-│   └── auth.js              # Rotas de cadastro e login
-├── Projeto_form/            # Frontend (Vite + React)
-│   ├── src/
-│   │   ├── App.jsx          # Componente principal
-│   │   ├── App.css          # Estilos da app
-│   │   ├── components/
-│   │   │   ├── RegisterForm.jsx    # Formulário de cadastro
-│   │   │   └── LoginForm.jsx       # Formulário de login
-│   │   └── styles/
-│   │       ├── RegisterForm.css    # Estilos do cadastro
-│   │       └── LoginForm.css       # Estilos do login
-│   └── package.json         # Dependências do frontend
-└── package.json             # Dependências do backend
+```bash
+cd c:\Users\savio\Projeto_Formulario
+npm run backend:start
+npm run backend:dev
+npm run frontend:dev
 ```
 
-## Endpoints da API
+## Backend
 
-### POST `/api/auth/register`
-Cadastro de novo usuário
+- Pasta: `back_end/`
+- Servidor: `back_end/server.js`
+- Banco de dados: `back_end/users.db` (criado automaticamente)
+- Rotas: `back_end/routes/auth.js`
+- Dependências: `express`, `cors`, `sqlite3`, `bcryptjs`
 
-**Request:**
-```json
-{
-  "name": "João Silva",
-  "email": "joao@email.com",
-  "password": "senha123",
-  "confirmPassword": "senha123"
-}
+## Frontend
+
+- Pasta: `front_end/`
+- Aplicação React com Vite
+- Componentes principais em `front_end/src/`
+- Formulários em `front_end/src/components/`
+- Estilos em `front_end/src/styles/`
+
+## Estrutura final do projeto
+
+```
+Projeto_Formulario/
+├── back_end/
+│   ├── database.js
+│   ├── package.json
+│   ├── package-lock.json
+│   ├── routes/
+│   │   └── auth.js
+│   └── server.js
+├── front_end/
+│   └── [arquivos do frontend existentes]
+├── Guia_Inicio.md
+├── GUiA_estudos.md
+└── README.md
 ```
 
-**Response (sucesso - 201):**
-```json
-{
-  "success": true,
-  "message": "Cadastro realizado com sucesso",
-  "user": {
-    "id": 1,
-    "name": "João Silva",
-    "email": "joao@email.com"
-  }
-}
-```
+## Endpoints principais
 
-**Response (erro):**
-```json
-{
-  "success": false,
-  "message": "Descrição do erro"
-}
-```
+- `POST /api/auth/register` — cadastrar novo usuário
+- `POST /api/auth/login` — autenticar usuário
 
-### POST `/api/auth/login`
-Autenticação do usuário
+## Dicas para tornar o projeto mais profissional
 
-**Request:**
-```json
-{
-  "email": "joao@email.com",
-  "password": "senha123"
-}
-```
+- Separe frontend e backend em pastas distintas
+- Use `npm install` separadamente em cada pasta
+- Faça validação no frontend e no backend
+- Use mensagens claras de erro e sucesso
+- Documente os comandos e a estrutura do projeto
 
-**Response (sucesso - 200):**
-```json
-{
-  "success": true,
-  "message": "Login realizado com sucesso",
-  "user": {
-    "id": 1,
-    "name": "João Silva",
-    "email": "joao@email.com"
-  }
-}
-```
+## Observação
 
-## Regras de Validação
-
-### Frontend
-- **Nome**: Mínimo 3 caracteres, obrigatório
-- **Email**: Formato válido, obrigatório
-- **Senha**: Mínimo 6 caracteres, obrigatória
-- **Confirmação**: Deve coincidir com a senha, obrigatória
-
-### Backend
-- **Nome**: Mínimo 3 caracteres, obrigatório
-- **Email**: Formato válido, único, obrigatório
-- **Senha**: Mínimo 6 caracteres, obrigatória
-- **Confirmação**: Deve coincidir com a senha, obrigatória
-
-## Tratamento de Erros
-
-### Frontend (Axios)
-```javascript
-try {
-  const response = await axios.post(url, data);
-  // Sucesso
-} catch (error) {
-  if (error.response) {
-    // Erro do servidor (4xx, 5xx)
-    message = error.response.data.message;
-  } else if (error.request) {
-    // Sem resposta do servidor
-    message = 'Erro de conexão';
-  } else {
-    // Erro na requisição
-    message = 'Erro: ' + error.message;
-  }
-}
-```
-
-### Backend (Express)
-- Validação de dados de entrada
-- Mensagens de erro específicas por tipo de falha
-- HTTP status codes apropriados
+O backend roda na porta `3001` e o frontend roda no Vite em uma porta separada, normalmente `5173`.
 - Middleware de tratamento de erros global
 
 ## Segurança
